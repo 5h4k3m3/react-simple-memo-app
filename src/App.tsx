@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { MemoList } from "./components/MemoList";
 
 export const App = () => {
   // textbox に入力された文字列(state)
@@ -32,17 +33,7 @@ export const App = () => {
       <h1>Simple Memo App</h1>
       <input type="text" value={text} onChange={onChangeText} />
       <button onClick={onClickAdd}>Add Item</button>
-      <div>
-        <p>Memo List</p>
-        <ul>
-          {memos.map((memo, index) => (
-            <li key={memo}>
-              <p>{memo}</p>
-              <button onClick={() => onClickDelete(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <MemoList />
     </>
   );
 };
