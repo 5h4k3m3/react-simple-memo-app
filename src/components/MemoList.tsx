@@ -1,4 +1,15 @@
-export const MemoList = () => {
+import { FC } from "react";
+
+// propsの型定義
+type Props = {
+  memos: string[];
+  onClickDelete: (index: number) => void;
+};
+
+export const MemoList: FC<Props> = (props) => {
+  // 分割代入
+  const { memos, onClickDelete } = props;
+
   return (
     <div>
       <p>Memo List</p>

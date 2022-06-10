@@ -1,7 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useCallback, FC } from "react";
 import { MemoList } from "./components/MemoList";
 
-export const App = () => {
+// FC: 関数コンポーネントの型定義
+export const App: FC = () => {
   // textbox に入力された文字列(state)
   const [text, setText] = useState<string>("");
   // memo list(state)
@@ -20,20 +21,24 @@ export const App = () => {
     setText("");
   };
   //Deleteボタンイベント
-  const onClickDelete = (index: number) => {
-    // stateを変更するために配列を新しく作る
-    const newMemos = [...memos];
-    // index番目から1要素削除する
-    newMemos.splice(index, 1);
-    setMemos(newMemos);
-  };
+  // useCallback: 関数のメモ化, 第2引数：依存配列
+  const onClickDelete = useCallback(
+    (index: number) => {
+      // stateを変更するために配列を新しく作る
+      const newMemos = [...memos];
+      // index番目から1要素削除する
+      newMemos.splice(index, 1);
+      setMemos(newMemos);
+    },
+    [memos]
+  );
 
   return (
     <>
       <h1>Simple Memo App</h1>
       <input type="text" value={text} onChange={onChangeText} />
       <button onClick={onClickAdd}>Add Item</button>
-      <MemoList />
+      <MemoList memos={memos} onClickDelete={onClickDelete} />
     </>
   );
 };
