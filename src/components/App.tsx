@@ -27,9 +27,24 @@ export const App: FC = () => {
 
   return (
     <>
-      <h1>Simple Memo App</h1>
-      <input type="text" value={text} onChange={onChangeText} />
-      <button onClick={onClickAdd}>Add Item</button>
+      <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Simple Memo App
+      </h1>
+      <div className="m-4 flex items-center">
+        <input
+          className="mr-4 w-full appearance-none rounded border py-2 px-3 shadow"
+          placeholder="new Todo..."
+          type="text"
+          value={text}
+          onChange={onChangeText}
+        />
+        <button
+          className="rounded border-2 p-2 text-gray-500 hover:bg-gray-400 hover:text-white"
+          onClick={onClickAdd}
+        >
+          Add
+        </button>
+      </div>
       <MemoList memos={memos} onClickDelete={onClickDelete} />
     </>
   );
